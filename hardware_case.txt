@@ -1,0 +1,23 @@
+Een grote organisatie wil een overzicht hebben van alle hardware die in hun vestigingen in gebruik zijn.
+Denk hierbij aan laptops, printers, desktops, monitoren, GSM's, modems, routers ect ect
+
+In deze database moet voor ieder apparaat kunnen worden vastgelegd:
+- het merk, type en serienummer, aankoopdatum (default datum van invoer in systeem)
+- de hardware (sub)groep (*1) waarbij dit apparaat hoort
+- een variabel aantal voor dat soort apparaat belangrijke kenmerken (*2)
+
+(*1) Hardware groepen kunnen sub-groepen bevatten, en ook subgroepen kunnen weer sub-groepen bevatten. (Printers -> Laserprinters, Monitoren -> LCD) 
+(*2) Bedenk zelf voor ieder soort apparaat (hardware groep) ten minste 3 belangrijke eigenschappen wanneer deze nog niet in het voorbeeld zijn vermeld.
+
+Maak voor bovenstaande gegevens een ERD, en denk daarbij aan 
+- uitbreidbaarhied kwa groepen en kenmerken
+- en zo optimaal mogelijke opslag
+
+Maak voor al je tabellen voorbeeld-data.
+
+Voor een onderhoudsprogramma voor deze database wordt (in deze database) tevens vastgelegd :
+- bij welk apparaat welke kenmerken moeten en mogen worden vastgelegd
+- en hoe deze in een onderhoudsprogramma moeten worden ingegeven (denk aan numeriek, tekst, restricties, multiple choice etc)
+
+
+
