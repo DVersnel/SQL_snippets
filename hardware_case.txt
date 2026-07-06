@@ -15,9 +15,6 @@ Maak voor bovenstaande gegevens een ERD, en denk daarbij aan
 
 Maak voor al je tabellen voorbeeld-data.
 
-Voor een onderhoudsprogramma voor deze database wordt (in deze database) tevens vastgelegd :
-- bij welk apparaat welke kenmerken moeten en mogen worden vastgelegd
-- en hoe deze in een onderhoudsprogramma moeten worden ingegeven (denk aan numeriek, tekst, restricties, multiple choice etc)
 
 
 
