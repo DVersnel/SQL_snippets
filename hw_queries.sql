@@ -1,5 +1,5 @@
 -- Welke groepen hoort een apparaat allemaal bij?
-SELECT
+    SELECT
     pm.model_id,
     pm.merk,
     pm.model_naam,
@@ -12,10 +12,10 @@ FROM
 WHERE
     pm.model_id = 7 -- Smartphones horen bij zowel computers als netwerk
 ORDER BY
-    t.depth ASC;
+    t.depth ASC
 
 -- Welke apparaten horen bij een groep?
-SELECT
+    SELECT
     pm.model_id,
     pm.merk,
     pm.model_naam,
@@ -30,9 +30,9 @@ WHERE
 -- Welke kenmerken horen bij een apparaat?
 SELECT
     pm.merk,
-    pm.model_naam 'type',
-    k.naam kenmerk,
-    CONCAT(kos.waarde, IFNULL(CONCAT(' ', k.eenheid), '')) waarde
+    pm.model_naam AS [type],
+    k.naam AS kenmerk,
+    kos.waarde + CASE WHEN k.eenheid IS NULL THEN '' ELSE ' ' + k.eenheid END AS waarde
 FROM
     product_model pm
     JOIN model_kenmerk_string mks ON pm.model_id = mks.model_id
@@ -50,12 +50,13 @@ SELECT
     kon.min,
     kon.max
 FROM groep_tree t
-JOIN groep_kenmerk gk ON t.ancestor_id = gk.id
-JOIN groep_kenmerk_kenmerken_opties gkko ON gk.kenmerk_id = gkko.groep_kenmerk_id
-LEFT JOIN kenmerken_opties_num kon ON gkko.kenmerken_opties_id = kon.kenmerk_optie_id
-LEFT JOIN kenmerken_opties_string kos ON gkko.kenmerken_opties_id = kos.kenmerk_optie_id
+JOIN groep_kenmerk gk ON t.ancestor_id = gk.hardware_groep_id
 JOIN kenmerk k ON gk.kenmerk_id = k.kenmerk_id
-JOIN hardware_groep hg_parent ON gk.id = hg_parent.groep_id
+JOIN hardware_groep hg_parent ON hg_parent.groep_id = gk.hardware_groep_id
+LEFT JOIN groep_kenmerk_kenmerk_opties_num gkon ON gkon.groep_kenmerk_id = gk.id
+LEFT JOIN kenmerken_opties_num kon ON kon.kenmerk_optie_id = gkon.kenmerk_optie_num_id
+LEFT JOIN groep_kenmerk_kenmerk_opties_string gkos ON gkos.groep_kenmerk_id = gk.id
+LEFT JOIN kenmerken_opties_string kos ON kos.kenmerk_optie_id = gkos.kenmerk_optie_string_id
 WHERE t.descendant_id = 10 -- Mobile workstations, categorie laptops als parent
-  AND gk.is_verplicht = TRUE
+  AND gk.is_verplicht = 1
 ORDER BY t.depth DESC;
